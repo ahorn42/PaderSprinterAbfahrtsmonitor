@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.Background;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -20,15 +22,64 @@ namespace PaderSprinterAbfahrtsmonitor {
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class MainPage : Page {
+
         DataModel dm;
+
+        private const string taskName = "LiveTileMonitorTask";
+        private const string taskEntryPoint = "PaderSprinterAbfahrtsmonitor.LiveTileMonitorTask";
+
+        private DispatcherTimer timer;
 
         public MainPage() {
             this.InitializeComponent();
-            dm = new DataModel() { stopName = "platzhalter" };
-            dm.monitorItems.Add(new MonitorItem(123, "17:31", "Wewer", "4 Min", "2", "17:23"));
+            dm = new DataModel();
+            dm.stopName = "Pontanusstraße";
+            dm.stopNameShort = "1094";
+            dm.timeFrame = "60";
             this.DataContext = dm;
+
+            // todo: was tun wenn keien werte da sind
+            dm.updateDm();
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromMinutes(1);
+            timer.Tick += dm.updateDm;
+            timer.Start();
         }
 
-        public string stop;
+        protected override void OnNavigatedTo(NavigationEventArgs e) {
+            Windows.UI.Core.SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
+            this.RegisterBackgroundTask();
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e) {
+            base.OnNavigatedFrom(e);
+
+        }
+
+        private async void RegisterBackgroundTask() {
+            var backgroundAccessStatus = await BackgroundExecutionManager.RequestAccessAsync();
+
+            if (backgroundAccessStatus == BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity || backgroundAccessStatus == BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity) {
+                foreach (var task in BackgroundTaskRegistration.AllTasks) {
+                    if (task.Value.Name == taskName) {
+                        task.Value.Unregister(true);
+                    }
+                }
+
+                BackgroundTaskBuilder taskBuilder = new BackgroundTaskBuilder();
+                taskBuilder.Name = taskName;
+                taskBuilder.TaskEntryPoint = taskEntryPoint;
+                taskBuilder.SetTrigger(new TimeTrigger(15, false));
+                var registration = taskBuilder.Register();
+            }
+        }
+
+        private void ABBtnRefreshClick(object sender, RoutedEventArgs e) {
+            dm.updateDm();
+        }
+
+        private void ABBtnSettingsClick(object sender, RoutedEventArgs e) {
+            this.Frame.Navigate(typeof(SettingsPage));
+        }
     }
 }

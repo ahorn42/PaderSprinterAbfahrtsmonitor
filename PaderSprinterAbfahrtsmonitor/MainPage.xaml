@@ -7,16 +7,19 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DataContext="{d:DesignInstance Type=local:DataModelSample}"
     mc:Ignorable="d">
+    <Page.Resources>
+        <local:NameToShortNameConverter x:Key="NameToShortNameConverter"/>
+    </Page.Resources>
     <Page.DataContext>
         <local:DataModel/>
     </Page.DataContext>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="PaderSprinter Abfahrsmonitor" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,47,0,0" TextWrapping="Wrap" Text="Haltestelle: " VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="87,47,0,0" TextWrapping="Wrap" Text="{Binding stopName}" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="10,72,0,0" TextWrapping="Wrap" Text="Abfahrten" VerticalAlignment="Top" FontSize="18.667"/>
-        <ListView x:Name="listView" Margin="10,107,10,10" ItemsSource="{Binding Path=monitorItems}">
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="PaderSprinter Abfahrsmonitor" VerticalAlignment="Top" FontSize="21.333" FontWeight="Bold"/>
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,38,0,0" TextWrapping="Wrap" Text="Haltestelle: " VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="87,38,0,0" TextWrapping="Wrap" Text="{Binding stopNameShort, Converter={StaticResource NameToShortNameConverter}}" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="10,63,0,0" TextWrapping="Wrap" Text="Abfahrten" VerticalAlignment="Top" FontSize="18.667"/>
+        <ListView x:Name="listView" Margin="0,93,0,10" ItemsSource="{Binding Path=monitorItems}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="0" VerticalAlignment="Stretch">
@@ -27,7 +30,7 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" HorizontalAlignment="Left" Text="{Binding patternText}"></TextBlock>
                         <TextBlock Grid.Column="1" HorizontalAlignment="Left" Text="{Binding direction}"></TextBlock>
-                        <TextBlock Grid.Column="2" HorizontalAlignment="Right" Text="{Binding plannedTime}"></TextBlock>
+                        <TextBlock Grid.Column="2" HorizontalAlignment="Right" Text="{Binding mixedTime}"></TextBlock>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -37,6 +40,29 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
-
     </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar Margin="0,0,0,0" VerticalAlignment="Bottom">
+            <AppBarButton Label="Haltestelle auswählen" >
+                <AppBarButton.Flyout>
+                    <Flyout>
+                        <StackPanel Height="100" Width="300">
+                            <TextBlock Text="Haltestelle auswählen" />
+                            <ComboBox Margin="0,10,0,68" VerticalAlignment="Bottom" ItemsSource="{Binding stops}" DisplayMemberPath="name" SelectedValuePath="shortName" SelectedValue="{Binding stopNameShort, Mode=TwoWay}" />
+                        </StackPanel>
+                    </Flyout>
+                </AppBarButton.Flyout>
+                <AppBarButton.Icon>
+                    <FontIcon Glyph="H" FontFamily="Segoe UI" FontSize="24"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+
+            <AppBarButton Label="Aktualisieren" Icon="Refresh" Click="ABBtnRefreshClick" />
+
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Label="Einstellungen" Click="ABBtnSettingsClick" />
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>

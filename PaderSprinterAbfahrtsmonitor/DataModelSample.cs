@@ -14,6 +14,8 @@ namespace PaderSprinterAbfahrtsmonitor {
             this.monitorItems.Add(new MonitorItem(321, "17:42", "Kaukenberg", "2 Min", "28", "17:27"));
             this.monitorItems.Add(new MonitorItem(321, "17:42", "Kaukenberg", "2 Min", "UNI", "17:27"));
             this.stopName = "Pontanusstr";
+            this.stopNameShort = "1094";
+            this.timeFrame = "60";
         }
 
     }

@@ -5,13 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace PaderSprinterAbfahrtsmonitor {
-    class MonitorItem {
+    public class MonitorItem {
         public int actualRelativeTime { get; }
         public string actualTime { get; }
         public string direction { get; }
         public string mixedTime { get; }
         public string patternText { get; }
         public string plannedTime { get; }
+
+
+        public MonitorItem() {
+
+        }
 
         public MonitorItem (int actualRelativeTime, string actualTime, string direction, string mixedTime, string patternText, string plannedTime) {
             this.actualRelativeTime = actualRelativeTime;
