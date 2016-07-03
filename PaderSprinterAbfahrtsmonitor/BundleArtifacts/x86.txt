@@ -1,2 +1,2 @@
-MainPackage=C:\Users\andreas\Documents\Visual Studio 2015\Projects\PaderSprinterAbfahrtsmonitor\PaderSprinterAbfahrtsmonitor\bin\x86\Release\PaderSprinterAbfahrtsmonitor_1.0.9.0_x86.appx
-SymbolPackage=C:\Users\andreas\Documents\Visual Studio 2015\Projects\PaderSprinterAbfahrtsmonitor\PaderSprinterAbfahrtsmonitor\AppPackages\PaderSprinterAbfahrtsmonitor_1.0.9.0_Test\PaderSprinterAbfahrtsmonitor_1.0.9.0_x86.appxsym
+MainPackage=C:\Users\andreas\Documents\Visual Studio 2015\Projects\PaderSprinterAbfahrtsmonitor\PaderSprinterAbfahrtsmonitor\bin\x86\Release\PaderSprinterAbfahrtsmonitor_1.0.10.0_x86.appx
+SymbolPackage=C:\Users\andreas\Documents\Visual Studio 2015\Projects\PaderSprinterAbfahrtsmonitor\PaderSprinterAbfahrtsmonitor\AppPackages\PaderSprinterAbfahrtsmonitor_1.0.10.0_Test\PaderSprinterAbfahrtsmonitor_1.0.10.0_x86.appxsym
