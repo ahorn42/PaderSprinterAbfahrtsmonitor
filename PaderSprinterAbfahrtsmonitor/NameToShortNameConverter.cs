@@ -18,6 +18,9 @@ namespace PaderSprinterAbfahrtsmonitor {
             ret.Add("Hauptbahnhof", "1000");
             ret.Add("Kamp", "1008");
             ret.Add("Parkplatz", "1091");
+            ret.Add("Technisches Rathaus", "1108");
+            ret.Add("Uni/Südring", "1112");
+            ret.Add("Uni/Schöne Aussicht", "1111");
 
             return ret;
         }
