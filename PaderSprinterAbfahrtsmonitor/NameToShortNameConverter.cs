@@ -21,6 +21,10 @@ namespace PaderSprinterAbfahrtsmonitor {
             ret.Add("Technisches Rathaus", "1108");
             ret.Add("Uni/Südring", "1112");
             ret.Add("Uni/Schöne Aussicht", "1111");
+            ret.Add("Winfriedstraße", "1117");
+            ret.Add("Heinz Nixdorf Wendeschleife", "1058");
+            ret.Add("Museums Forum", "1086");
+            ret.Add("An der Kapelle", "3106");
 
             return ret;
         }
