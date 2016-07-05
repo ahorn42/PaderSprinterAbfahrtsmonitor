@@ -49,7 +49,7 @@ namespace PaderSprinterAbfahrtsmonitor {
                         (int)elem.GetObject()["actualRelativeTime"].GetNumber(),
                         actualTime,
                         elem.GetObject()["direction"].GetString(),
-                        elem.GetObject()["mixedTime"].GetString(),
+                        elem.GetObject()["mixedTime"].GetString().Replace("%UNIT_MIN%", "Min"),
                         patternText,
                         plannedTime));
                 } catch (Exception ex) {
