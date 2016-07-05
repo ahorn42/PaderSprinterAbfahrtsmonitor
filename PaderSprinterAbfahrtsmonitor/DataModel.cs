@@ -62,6 +62,21 @@ namespace PaderSprinterAbfahrtsmonitor {
             }
         }
 
+        public int timeFrameInt {
+            get {
+                int ret = 60;
+                try {
+                    ret = int.Parse(timeFrame);
+                } catch (Exception e) {
+                    Debug.WriteLine(e.Message);
+                }
+                return ret;
+            }
+            set {
+                timeFrame = value.ToString();
+            }
+        }
+
         public ObservableCollection<MonitorItem> monitorItems {
             get; set;
         }

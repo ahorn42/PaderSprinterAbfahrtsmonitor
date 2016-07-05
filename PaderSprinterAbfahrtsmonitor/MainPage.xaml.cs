@@ -23,7 +23,11 @@ namespace PaderSprinterAbfahrtsmonitor {
     /// </summary>
     public sealed partial class MainPage : Page {
 
-        DataModel dm;
+        DataModel dm = new DataModel {
+            stopName = "Pontanusstraße",
+            stopNameShort = "1094",
+            timeFrame = "60"
+        };
 
         private const string taskName = "LiveTileMonitorTask";
         private const string taskEntryPoint = "PaderSprinterAbfahrtsmonitor.LiveTileMonitorTask";
@@ -32,10 +36,6 @@ namespace PaderSprinterAbfahrtsmonitor {
 
         public MainPage() {
             this.InitializeComponent();
-            dm = new DataModel();
-            dm.stopName = "Pontanusstraße";
-            dm.stopNameShort = "1094";
-            dm.timeFrame = "60";
             this.DataContext = dm;
 
             // todo: was tun wenn keien werte da sind
