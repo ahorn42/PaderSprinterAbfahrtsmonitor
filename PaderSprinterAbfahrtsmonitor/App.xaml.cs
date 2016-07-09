@@ -22,6 +22,13 @@ namespace PaderSprinterAbfahrtsmonitor
     /// </summary>
     sealed partial class App : Application
     {
+        public static DataModel DataModel = new DataModel
+        {
+            stopName = "Pontanusstraße",
+            stopNameShort = "1094",
+            timeFrame = "60"
+        };
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().

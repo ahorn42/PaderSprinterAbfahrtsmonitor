@@ -34,5 +34,12 @@ namespace PaderSprinterAbfahrtsmonitor {
                 }
             };
         }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);        
+            this.DataContext = null;           
+            this.DataContext = App.DataModel;     
+        }
     }
 }

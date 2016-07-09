@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace PaderSprinterAbfahrtsmonitor {
-    class Stop {
+    public class Stop {
         public string name { get; set; }
         public string shortName { get; set; }
 
@@ -19,7 +19,7 @@ namespace PaderSprinterAbfahrtsmonitor {
         }
     }
 
-    class DataModel : INotifyPropertyChanged {
+    public class DataModel : INotifyPropertyChanged {
         private string _stopName;
         public string stopName {
             get {

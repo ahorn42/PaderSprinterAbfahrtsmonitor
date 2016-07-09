@@ -22,13 +22,6 @@ namespace PaderSprinterAbfahrtsmonitor {
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class MainPage : Page {
-
-        DataModel dm = new DataModel {
-            stopName = "Pontanusstraße",
-            stopNameShort = "1094",
-            timeFrame = "60"
-        };
-
         private const string taskName = "LiveTileMonitorTask";
         private const string taskEntryPoint = "PaderSprinterAbfahrtsmonitor.LiveTileMonitorTask";
 
@@ -36,18 +29,22 @@ namespace PaderSprinterAbfahrtsmonitor {
 
         public MainPage() {
             this.InitializeComponent();
-            this.DataContext = dm;
+            this.DataContext = App.DataModel;
 
             // todo: was tun wenn keien werte da sind
-            dm.updateDm();
+            App.DataModel.updateDm();
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMinutes(1);
-            timer.Tick += dm.updateDm;
+            timer.Tick += App.DataModel.updateDm;
             timer.Start();
+
+            
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e) {
             Windows.UI.Core.SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
+            this.DataContext = null;
+            this.DataContext = App.DataModel;
             this.RegisterBackgroundTask();
         }
 
@@ -75,7 +72,7 @@ namespace PaderSprinterAbfahrtsmonitor {
         }
 
         private void ABBtnRefreshClick(object sender, RoutedEventArgs e) {
-            dm.updateDm();
+            App.DataModel.updateDm();
         }
 
         private void ABBtnSettingsClick(object sender, RoutedEventArgs e) {
