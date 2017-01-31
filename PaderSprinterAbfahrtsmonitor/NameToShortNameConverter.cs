@@ -25,6 +25,7 @@ namespace PaderSprinterAbfahrtsmonitor {
             ret.Add("Heinz Nixdorf Wendeschleife", "1058");
             ret.Add("Museums Forum", "1086");
             ret.Add("An der Kapelle", "3106");
+            ret.Add("Ilseweg", "1064");
 
             return ret;
         }
